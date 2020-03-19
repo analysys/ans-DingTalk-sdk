@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "page/API/index/index",
+    "page/API/startup/startup",
+    "page/API/pageview/pageview",
+    "page/API/track/track",
+    "page/API/userID/userID",
+    "page/API/profile/profile",
+    "page/API/superProperty/superProperty",
+    "page/API/reset/reset",
+    "page/API/share/share"
+  ],
+  "window": {
+    "defaultTitle": "小程序",
+    "backgroundColor": "#F5F5F9",
+    "pullRefresh": false,
+    "allowsBounceVertical": true
+  }
+}
