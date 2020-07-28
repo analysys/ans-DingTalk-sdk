@@ -19,7 +19,7 @@ function changePath () {
                 .replace(/\@Router/g, pathResolve('../../src/ProgramDiff/dingtalk/router'))
                 .replace(/\$ANS/g, 'DD')
                 .replace(/\$LIB/g, 'DingTalk')
-                .replace(/\$LibVERSION/, '4.3.0')
+                .replace(/\$LibVERSION/, '4.3.1')
             return {
                 code: code,
                 id: id
@@ -29,6 +29,102 @@ function changePath () {
 }
 export default [{
     input: './src/main_custom.js',
+    output: [{
+        file: './DingTalkDemo/util/sdk/AnalysysAgent_Dingtalk_SDK.custom.es6.min.js',
+        format: 'esm',
+        name: 'Ans',
+        plugins: [
+            terser({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }, {
+        file: './dist/DingTalk/AnalysysAgent_Dingtalk_SDK.custom.es6.min.js',
+        format: 'esm',
+        name: 'Ans',
+        plugins: [
+            terser({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }, {
+        file: './taroDemo/src/sdk/AnalysysAgent_Dingtalk_SDK.custom.es6.min.js',
+        format: 'esm',
+        name: 'Ans',
+        plugins: [
+            terser({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }, {
+        file: './DingTalkDemo/util/sdk/AnalysysAgent_Dingtalk_SDK.custom.min.js',
+        format: 'cjs',
+        name: 'Ans',
+        plugins: [
+            uglify({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }, {
+        file: './dist/Dingtalk/AnalysysAgent_Dingtalk_SDK.custom.min.js',
+        format: 'cjs',
+        name: 'Ans',
+        plugins: [
+            uglify({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }, {
+        file: './taroDemo/src/sdk/AnalysysAgent_Dingtalk_SDK.custom.min.js',
+        format: 'cjs',
+        name: 'Ans',
+        plugins: [
+            uglify({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }],
+    plugins: [
+        changePath(),
+        replace({
+            $ans: 'dd',
+            delimiters: ['', '']
+        }),
+        resolve({
+            jsnext: true,
+            main: true,
+            browser: true
+        }),
+        commonjs(),
+        eslint({
+            exclude: [
+                'src/**'
+            ]
+        }),
+        babel({
+            exclude: 'node_modules/**'
+        }),
+        terser({
+            'mangle': {
+                toplevel: true
+            }
+        })
+    ],
+    sourceMap: true
+}, {
+    input: './src/main.js',
     output: [{
         file: './DingTalkDemo/util/sdk/AnalysysAgent_Dingtalk_SDK.es6.min.js',
         format: 'esm',
@@ -75,6 +171,17 @@ export default [{
         ]
     }, {
         file: './dist/Dingtalk/AnalysysAgent_Dingtalk_SDK.min.js',
+        format: 'cjs',
+        name: 'Ans',
+        plugins: [
+            uglify({
+                'mangle': {
+                    toplevel: true
+                }
+            })
+        ]
+    }, {
+        file: './test/util/sdk/AnalysysAgent_Dingtalk_SDK.min.js',
         format: 'cjs',
         name: 'Ans',
         plugins: [
